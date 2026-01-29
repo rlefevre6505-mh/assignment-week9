@@ -1,4 +1,5 @@
-User Stories
+# User Stories
+
 🐿️ As a user, I want to sign up and log in securely using Clerk so that I can interact with the app as a user on the site and edit my user profile.
 🐿️ As a user, I want to see an error/not found page (using error.js or not-found.js) if I try to visit a page on the site which doesn’t exist.
 🐿️ As a user, I want an enhanced user experience with modern UI components, such as using a Radix UI Primitive or a similar library, so that the interface is more intuitive and visually appealing.
@@ -10,20 +11,9 @@ Requirements
 🎯 Use 1 or more Radix UI Primitive component, or something similar (e.g. use of a different component library to enhance UX, not just Tailwind).
 🎯 Enable users to create a user profile, and input profile information (such as a user biography) using a form. Users and user information should be stored in their own table in the database and handled with an appropriate route.
 🎯 Enable users to create posts associated with their Clerk userId. Posts should be displayed on the user’s profile page.
-How to Deploy
-Next.js was developed by Vercel, which is where we’re going to deploy our app, so some of the difficulties faced when deploying are reduced.
 
-Ensure that any data displayed using .map() has a key.
-Push everything to GitHub.
-Click ‘Add New…’ and then select ‘Project’.
-In the ‘Environment Variables’ drop-down menu, add anything from your .env.local file here.
-Wait a minute or so, and your website is deployed!
-Stretch Goals
-To achieve an 8/8 in your assignment, aim to achieve all of the requirements, plus some extra goals for each section of the marking rubric. This can be excellence in styling or something that demonstrates creativity or innovation in the week’s topics.
+# Stretch User Stories
 
-Below are some examples of stretch goals and user stories that you could add to your project, but are not expected to.
-
-Stretch User Stories
 🐿️ As a user, I want to edit the content of my posts, so that I can correct any spelling mistakes or add content that I forgot.
 🐿️ As a user, I want to delete my posts, so that I can remove duplicated content accidentally posted.
 🐿️ As a user, I want to visit other users’ profiles after seeing their posts on a global timeline so that I can learn more about them and view their other content.
@@ -39,8 +29,8 @@ Stretch Requirements
 🏹 Enable users to like posts by linking their user_id to the liked_post in a junction table.
 🏹 Ensure that a user’s biography cannot be left blank. If a user logs in without one, prompt them to add this information.
 🏹 Create and display an error/not found page if the user visits another users profile that doesn’t exist.
-Reflection
-Please also provide an assignment reflection in your project README.md file.
+
+# Reflection
 
 Required
 🎯 What requirements did you achieve?
