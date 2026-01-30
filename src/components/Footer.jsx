@@ -1,14 +1,23 @@
 import Link from "next/link";
+import styles from "./Footer.module.css";
+import { currentUser } from "@clerk/nextjs/server";
 
-export default function Footer() {
+export default async function Footer() {
+  const user = await currentUser();
+
+  if (!user) return <></>;
+
   return (
     <footer className="@apply fixed bottom-0 inset-x-0 ">
       <nav className="@apply flex flex-row grow justify-evenly items-center w-full h-16 absolute bottom-0 ">
-        <Link className="link" href="/">
+        <Link className={styles.link} href="/">
           Home
         </Link>
-        <Link className="link" href="/events">
-          View blog feed
+        <Link className={styles.link} href="/profile/:username">
+          My Profile
+        </Link>
+        <Link className={styles.link} href="/events">
+          View gigs
         </Link>
         {/* <Link className="link" href="/about">
           About

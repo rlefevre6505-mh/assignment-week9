@@ -1,3 +1,4 @@
+import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 
@@ -6,7 +7,7 @@ export default async function UserDetailsFromPage() {
 
   const today = new Date();
 
-  function handleSubmit() {
+  async function handleSubmit(rawFormData) {
     "use server";
     const formValues = {
       username: user.username,
@@ -30,7 +31,7 @@ export default async function UserDetailsFromPage() {
     } catch (error) {
       console.error(error);
     }
-    redirect("/rollercoasters");
+    redirect("/profile/:username");
   }
 
   return (

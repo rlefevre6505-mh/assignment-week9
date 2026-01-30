@@ -1,0 +1,13 @@
+.main {
+  display: flex;
+  color: whitesmoke;
+}
+
+.link {
+  color: whitesmoke;
+  font-size: 1.2rem;
+}
+
+.link:hover {
+  color: var(--color-purple);
+}

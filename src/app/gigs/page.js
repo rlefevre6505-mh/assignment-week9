@@ -1,15 +1,14 @@
 // render lits of all posts (we could also render who posted them)
 
+import styles from "./gigs.module.css";
 import { db } from "@/utils/dbconnection";
 // import Link from "next/link";
 
 export default async function GigsPage({ searchParams }) {
   const query = await db.query(`SELECT * FROM gigs`);
   const gigs = query.rows;
-
   const queryGoing = await db.query(`SELECT * FROM users_going`);
   const attendees = queryGoing.rows;
-  console.log(attendees);
 
   // TODO: implement sorting by title of date
   // const queryString = await searchParams;
@@ -34,7 +33,7 @@ export default async function GigsPage({ searchParams }) {
 
   return (
     <>
-      <h2>All Blog Posts</h2>
+      <h2 className={styles.h2}>All Gigs</h2>
 
       {/* TODO: set up links for sorting */}
       <div className={`#`}>
@@ -58,31 +57,30 @@ export default async function GigsPage({ searchParams }) {
           </Link>
         </div> */}
       </div>
-      <div className="@apply flex flex-col items-center">
+      <div className={styles.gigs}>
         {gigs.map((gig, i) => {
           const yearString = gig.date.toString().slice(11, 15);
           const monthString = gig.date.toString().slice(4, 7);
           const dayString = gig.date.toString().slice(8, 10);
           const dateString = `${yearString} - ${dayString} ${monthString}`;
           return (
-            <div key={`gigpost${i}`} className="mt-16">
-              <h3 className={`#`}>{gig.title}</h3>
+            <div key={`gigpost${i}`} className={styles.gig}>
+              <h3 className={styles.title}>{gig.title}</h3>
               <p className="@apply text-40 text-center mb-4">
                 {gig.location} - {dateString}
               </p>
               <div>
-                <h4>Who&apos;s going?</h4>
-                <div>
+                <h4 className={styles.h4}>Who&apos;s going?</h4>
+                <div className={styles.going}>
                   {attendees.map((attendee, i) => {
                     if (attendee.gig_id === gig.id) {
                       return (
                         <div
                           key={`attendees-div${i}`}
-                          className="flex flex-row"
+                          className={styles.attendee}
                         >
                           <p>{attendee.username}</p>
-                          <p>-</p>
-                          <p>{attendee.going}</p>
+                          <p>{`~ ${attendee.going} ~`}</p>
                         </div>
                       );
                     } else {

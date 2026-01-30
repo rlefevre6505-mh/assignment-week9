@@ -1,8 +1,10 @@
+import styles from "./Header.module.css";
+
 export default function Header() {
   return (
-    <div>
-      <h1>GigBlog</h1>
+    <header className={styles.header}>
+      <h1 className={styles.h1}>GigLog</h1>
       {/* text showing currently logged in usere goes here */}
-    </div>
+    </header>
   );
 }
