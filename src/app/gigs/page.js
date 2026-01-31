@@ -2,7 +2,8 @@
 
 import styles from "./gigs.module.css";
 import { db } from "@/utils/dbconnection";
-// import Link from "next/link";
+import Link from "next/link";
+
 
 export default async function GigsPage({ searchParams }) {
   const query = await db.query(`SELECT * FROM gigs`);
@@ -65,6 +66,7 @@ export default async function GigsPage({ searchParams }) {
           const dateString = `${yearString} - ${dayString} ${monthString}`;
           return (
             <div key={`gigpost${i}`} className={styles.gig}>
+              {/* <Dropdown /> */}
               <h3 className={styles.title}>{gig.title}</h3>
               <p className="@apply text-40 text-center mb-4">
                 {gig.location} - {dateString}
@@ -87,6 +89,27 @@ export default async function GigsPage({ searchParams }) {
                       return null;
                     }
                   })}
+                </div>
+                <div className={styles.gignav}>
+                  <Link
+                    className={styles.link}
+                    href={`/gigs/add-going/${gig.id}`}
+                  >
+                    Add a ~going~ status
+                  </Link>
+                  <Link
+                    className={styles.link}
+                    href={`/gigs/edit-going/${gig.id}`}
+                  >
+                    Edit your current ~going~ status
+                  </Link>
+                  <Link
+                    className={styles.link}
+                    // add conditional here for if user is already going
+                    href={`/gigs/delete-going/${gig.id}`}
+                  >
+                    Remove your ~going~ status
+                  </Link>
                 </div>
               </div>
             </div>

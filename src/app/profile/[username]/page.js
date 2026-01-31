@@ -10,6 +10,8 @@
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import styles from "./profile.module.css";
+import Link from "next/link";
+import Dropdown from "@/components/Dropdown";
 
 export default async function ProfilePage() {
   // db queries to GET info from tables go here
@@ -19,7 +21,7 @@ export default async function ProfilePage() {
     [user.username],
   );
   const data = queryProfile.rows;
-  console.log(data[0]);
+  console.log(`data = ${data}`);
 
   const queryGigs = await db.query(`SELECT * FROM gigs`);
   const gigs = queryGigs.rows;
@@ -29,34 +31,37 @@ export default async function ProfilePage() {
   return (
     <>
       <div className={`#`}>
-        <h2>Profile: {user.username}</h2>
+        <h2 className={styles.h2}>Profile: {user.username}</h2>
         {data.map((datum, i) => {
-          // const yearString = datum.join_date.toString().slice(11, 15);
-          // const monthString = datum.join_date.toString().slice(4, 7);
-          // const dayString = datum.join_date.toString().slice(8, 10);
-          // const dateString = `${dayString} ${monthString} ${yearString}`;
-
+          const yearString = datum.join_date.toString().slice(11, 15);
+          const monthString = datum.join_date.toString().slice(4, 7);
+          const dayString = datum.join_date.toString().slice(8, 10);
+          const dateString = `${dayString} ${monthString} ${yearString}`;
+          console.log(dateString);
           return (
-            <div key={`profile${i}`}>
-              <p>
+            <div key={`profile${i}`} className={styles.profile}>
+              <p className={styles.p}>
                 {datum.age} years old, from {datum.location}.
               </p>
-              <p>Joined GigLog on {`dateString`}</p>
+              <p className={styles.p}>Joined GigLog on {dateString}</p>
+              <div className={styles.p}>
               <p>Bio:</p>
               <p>{datum.bio}</p>
+              </div>
             </div>
-          );
+          ); 
         })}
-        <h3>{user.username}&apos;s posted gigs</h3>
+        <h3 className={styles.h3}>My posted gigs:</h3>
         <div className={styles.gigs}>
           {gigs.map((gig, i) => {
             const yearString = gig.date.toString().slice(11, 15);
             const monthString = gig.date.toString().slice(4, 7);
             const dayString = gig.date.toString().slice(8, 10);
             const dateString = `${yearString} - ${dayString} ${monthString}`;
-            if (user.username === gig.poster)
+            if (user.username == gig.poster)
               return (
                 <div key={`gigpost${i}`} className={styles.gig}>
+                   <Dropdown props={gig.id}/>
                   <h3 className={styles.title}>{gig.title}</h3>
                   <p className="@apply text-40 text-center mb-4">
                     {gig.location} - {dateString}
@@ -79,6 +84,27 @@ export default async function ProfilePage() {
                           return null;
                         }
                       })}
+                      <div className={styles.gignav}>
+                  <Link
+                    className={styles.link}
+                    href={`/gigs/add-going/${gig.id}`}
+                  >
+                    Add a ~going~ status
+                  </Link>
+                  <Link
+                    className={styles.link}
+                    href={`/gigs/edit-going/${gig.id}`}
+                  >
+                    Edit your current ~going~ status
+                  </Link>
+                  <Link
+                    className={styles.link}
+                    // add conditional here for if user is already going
+                    href={`/gigs/delete-going/${gig.id}`}
+                  >
+                    Remove your ~going~ status
+                  </Link>
+                      </div>
                     </div>
                   </div>
                 </div>

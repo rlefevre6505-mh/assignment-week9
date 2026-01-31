@@ -2,11 +2,13 @@
 
 :root {
   --color-text: rgb(252, 252, 252);
-  --color-bg: rgb(40, 40, 40);
+  --color-bg: rgb(32, 32, 32);
   --color-purple: rgb(175, 0, 190);
 }
 
 * {
   background-color: var(--color-bg);
   font-family: var(--font-quicksand);
+  color: var(--color-text);
 }
+

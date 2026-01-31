@@ -16,12 +16,12 @@ export default async function Footer() {
         <Link className={styles.link} href="/profile/:username">
           My Profile
         </Link>
-        <Link className={styles.link} href="/events">
+        <Link className={styles.link} href="/gigs">
           View gigs
         </Link>
-        {/* <Link className="link" href="/about">
-          About
-        </Link> */}
+        <Link className={styles.link} href="/new-gig">
+          Add a gig
+        </Link>
       </nav>
     </footer>
   );

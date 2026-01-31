@@ -1,7 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/utils/dbconnection";
 import { redirect } from "next/navigation";
-import { revalidatePath } from "next/cache"
+import { revalidatePath } from "next/cache";
 import styles from "./new-gig.module.css";
 
 // render form to intsert post data to table
@@ -33,6 +33,12 @@ export default async function newPostPage() {
     redirect(`/gigs/`);
   }
 
+  const today = new Date();
+  // const day = today.getDate();
+  // const month = today.getMonth() + 1;
+  // const year = today.getFullYear();
+  // let currentDate = `${day}/${month}/${year}`;
+
   return (
     <>
       <h1 className={styles.h1}>Add a new post</h1>
@@ -53,7 +59,12 @@ export default async function newPostPage() {
         <label htmlFor="date" className={styles.label}>
           Date:{" "}
         </label>
-        <input className={styles.input} name="date" type="date"></input>
+        <input
+          className={styles.input}
+          name="date"
+          type="date"
+          max={today} // this doesnt work...
+        ></input>
         <label htmlFor="location" className={styles.label}>
           Location:{" "}
         </label>

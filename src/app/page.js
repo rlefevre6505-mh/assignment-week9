@@ -9,14 +9,14 @@ export default async function HomePage() {
   if (!user)
     return (
       <>
-        <div classsname="flex flex-col text-white">
+        <div classsname={styles.main}>
           <h2 className={styles.h2}>Welcome to Gig Log!</h2>
-          <p>Please sign in or sign up to continue</p>
+          <p className={styles.welcome}>Please sign in or sign up to continue</p>
           <div className={styles.links}>
-            <Link className={styles.link} href="/sign-in">
+            <Link className={styles.button} href="/sign-in">
               Sign In
-            </Link>
-            <Link className={styles.link} href="/sign-up">
+            </Link> 
+            <Link className={styles.button} href="/sign-up">
               Sign Up
             </Link>
           </div>
@@ -25,19 +25,17 @@ export default async function HomePage() {
     );
   return (
     <>
-      <div classsname="flex flex-col center text-white">
-        <p>Welcome {user?.username}!</p>
+      <div classsname={styles.main}>
+        <h2 className={styles.h2}>Welcome {user?.username}</h2>
         <div className={styles.links}>
-          <Link className={styles.link} href="/profile">
+          <Link className={styles.button} href="/profile/:username">
             Continue to my profile
           </Link>
-          <Link className={styles.link} href="/gigs">
-            View gigs
-          </Link>
-        </div>
-        <SignOutButton>
-          <button>Sign out</button>
+                  <SignOutButton>
+          <button className={styles.button}>Sign out</button>
         </SignOutButton>
+        </div>
+
       </div>
     </>
   );

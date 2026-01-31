@@ -1,10 +1,10 @@
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import styles from "./user-details-form.module.css"
 
 export default async function UserDetailsFromPage() {
   const user = await currentUser();
-
   const today = new Date();
 
   async function handleSubmit(rawFormData) {
@@ -36,18 +36,17 @@ export default async function UserDetailsFromPage() {
 
   return (
     <>
-      <h2>Please provide some information for your profile</h2>
-      <form action={handleSubmit}>
-        <label htmlFor="age">How old are you?</label>
-        <input name="age"></input>
-
-        <label htmlFor="location">Where are you based?</label>
-        <input name="location"></input>
-
-        <label htmlFor="bio">Tell everyone a bit about yourself</label>
-        <input name="bio"></input>
-
-        <button type="submit">Submit</button>
+   
+    <h2 className={styles.h2}>Welcome {user.username}, please provide some information for your profile</h2>
+    
+      <form action={handleSubmit} className={styles.form}>
+        <label className={styles.label} htmlFor="age">How old are you?</label>
+        <input className={styles.input} type="number" name="age" min="1"></input>
+        <label className={styles.label} htmlFor="location">Where are you based?</label>
+        <input className={styles.input} name="location"></input>
+        <label className={styles.label} htmlFor="bio">Tell everyone a bit about yourself</label>
+        <textarea className={styles.area} name="bio" maxLength="99"></textarea>
+        <button className={styles.button} type="submit">Continue</button>
       </form>
     </>
   );
