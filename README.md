@@ -1,16 +1,9 @@
 # User Stories
 
-🐿️ As a user, I want to sign up and log in securely using Clerk so that I can interact with the app as a user on the site and edit my user profile.
-🐿️ As a user, I want to see an error/not found page (using error.js or not-found.js) if I try to visit a page on the site which doesn’t exist.
-🐿️ As a user, I want an enhanced user experience with modern UI components, such as using a Radix UI Primitive or a similar library, so that the interface is more intuitive and visually appealing.
 🎯 ---edit my user profile.
-🎯 Create and display an error/not found page if the user visits a page that doesn’t exist.
-🎯 Use 1 or more Radix UI Primitive component, or something similar (e.g. use of a different component library to enhance UX, not just Tailwind).
 
 # Stretch User Stories
 
-🐿️ As a user, I want to edit the content of my posts, so that I can correct any spelling mistakes or add content that I forgot.
-🐿️ As a user, I want to delete my posts, so that I can remove duplicated content accidentally posted.
 🐿️ As a user, I want to visit other users’ profiles after seeing their posts on a global timeline so that I can learn more about them and view their other content.
 🐿️ As a user, I want to follow other users so that I can stay updated on their posts and activities.
 🐿️ As a user, I want to like other users’ posts so that I can show appreciation for content I enjoy.
@@ -27,6 +20,12 @@ Stretch Requirements
 
 # Reflection
 
+I decided to expand on my week 7 assignment for this, as I liked the concept and had though at the time that if it has user log-ins there was a lot more I could do with it. Looking at the requiremwnts this week it was also clear that I should be able to meet them all within the constraints of the concept I was using.
+
+When starting out made a user flow in Figma, though later added additional routes such as edit-profile that were not reflected in the digram ( https://www.figma.com/board/LRzWTvddwDEBPNoLfbpPqe/Untitled?node-id=0-1&p=f&t=WfXu0rRq8Cg5OQUn-0 ). I also thought through my database needs and set up 3 tables. My users table initially had an ID (primary key - INT), a username and a screenname, but I then reduced these to only a username (as the primary key) once I established that duplicate log in names could be ruled out using Clerk.
+
+Once I started coding I got the main routes set up pretty easily, with the queries, .map's and forms tested and working by friday afternoon. However, I encountered an error wiht the usernames I had put into the database tables manually as it turns out Clerk automatically sets them to all lower case. I trouble-shot this wiht some help from Bertie and after a bit of testing (and finding a couple more related errors), found that this could be worked with. In hind sight, this shows it would have been far better to stick with the conventional generated INT as the primary key for the table.
+
 Required
 🎯 What requirements did you achieve?
 🎯 Were there any requirements or goals that you were unable to achieve?
@@ -41,18 +40,13 @@ What went really well and what could have gone better?
 
 # notes
 
-use dropdown in header
-add signoutbutton to dropdown
-add search function to dropdown?
-
 As a user you can:
 
 - sign up or sign in, then log out
 - view your profile page
-- post an upcoming gig (date input limited to today or future dates)
-- view all posted gigs ()
-- edit or delete gigs you have posted (delete only available if noone is going - user must remove their going status first)
+- post an upcoming gig
+- view all posted gigs (sort?)
+- edit or delete gigs you have posted (delete only available if noone is going - user must remove their own going status first)
 - tell people you're going to any gig by adding a ~going~ status
 - change your ~going~ status for individual gigs
 - remove your ~going~ status for individual gigs
-

@@ -28,8 +28,7 @@ input:focus {
 }
 
 .button {
-  margin-top: 2rem;
-
+  margin-top: 1.2rem;
   color: whitesmoke;
   font-family: var(--font-teko);
   font-size: 1.6rem;

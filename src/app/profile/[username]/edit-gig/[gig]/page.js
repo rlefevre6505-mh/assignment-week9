@@ -1,26 +1,23 @@
-"use server"
+"use server";
 
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
-import styles from "./edit-gig.module.css"
+import styles from "./edit-gig.module.css";
 
-export default async function EditGigPage({ params }){
+export default async function EditGigPage() {
+  const user = await currentUser();
+  const userName = user.username;
 
-const user = await currentUser();
-const userName = user.username;
-const {gig} = await params
+  const currentQuery = await db.query(`SELECT * FROM gigs WHERE id = $1`, [
+    gig,
+  ]);
+  const data = currentQuery.rows[0];
 
-    const currentQuery = await db.query(
-    `SELECT * FROM gigs WHERE id = $1`,
-    [gig],
-  );
-  const data = currentQuery.rows[0]
-
-  async function handleSubmit(rawFormData){
-       "use server";
-      const formValues = {
+  async function handleSubmit(rawFormData) {
+    "use server";
+    const formValues = {
       title: rawFormData.get("title"),
       date: rawFormData.get("date"),
       location: rawFormData.get("location"),
@@ -33,10 +30,10 @@ const {gig} = await params
     redirect(`http://localhost:3000/profile/:username`);
   }
 
-    const currentDate = data.date.toString();
-    console.log(currentDate)
-  
-    function getDate() {
+  const currentDate = data.date.toString();
+  console.log(currentDate);
+
+  function getDate() {
     const month = currentDate.slice(4, 7);
     if (month === "Jan") {
       const yearString = currentDate.slice(11, 15);
@@ -101,9 +98,10 @@ const {gig} = await params
     }
   }
 
-   return(<>
+  return (
+    <>
       <h2 className={styles.h2}>Edit details of this gig:</h2>
-      <form className={styles.form} action={handleSubmit} >
+      <form className={styles.form} action={handleSubmit}>
         <label
           htmlFor="title"
           placeholder="Name of band or festival"
@@ -145,6 +143,6 @@ const {gig} = await params
           Submit
         </button>
       </form>
-    
-    </>)
+    </>
+  );
 }

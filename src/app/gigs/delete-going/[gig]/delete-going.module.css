@@ -1,8 +1,8 @@
-.h2{
-  font-size:2.4rem;
-  text-align:center;
+.h2 {
+  font-size: 2.4rem;
+  text-align: center;
   margin: 0 12rem;
-  margin-bottom:2.8rem;
+  margin-bottom: 2.8rem;
 }
 
 .form {
@@ -10,11 +10,11 @@
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  font-size:1.6rem;
+  font-size: 1.6rem;
 }
 
 .button {
-  margin-top:1.6rem;
+  margin-top: 1.6rem;
   color: whitesmoke;
   font-family: var(--font-teko);
   font-size: 2rem;
@@ -27,4 +27,16 @@
 .button:hover {
   cursor: pointer;
   color: var(--color-purple);
+}
+
+@media (width < 600px) {
+  .h2 {
+    font-size: 1.2rem;
+    margin: 2rem;
+    margin-bottom: 1.2rem;
+  }
+  .button {
+    font-size: 1.6rem;
+    width: 16rem;
+  }
 }

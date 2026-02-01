@@ -82,3 +82,26 @@ body {
 .link:hover {
   color: var(--color-purple);
 }
+
+@media (width < 600px) {
+  .h2 {
+    font-size: 2rem;
+  }
+  .gig {
+    width: 80vw;
+  }
+  .title {
+    font-size: 2.4rem;
+    text-align: center;
+  }
+  .going {
+    gap: 0.4rem, 0.8rem;
+  }
+  .attendee {
+    font-size: 0.8rem;
+    border-radius: 8px;
+  }
+  .link {
+    padding: 0.4rem 0.8rem;
+  }
+}

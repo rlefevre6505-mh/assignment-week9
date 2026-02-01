@@ -34,7 +34,9 @@ export default async function AddGoingPage({ params }) {
         </h2>
 
         <form action={handleSubmit} className={styles.form}>
-          <label htmlFor="going">Your new ~going~ status:</label>
+          <label className={styles.label} htmlFor="going">
+            Your new ~going~ status:
+          </label>
           <select className={styles.select} name="going">
             <option defaultValue selected disabled>
               Please select an option
@@ -42,7 +44,9 @@ export default async function AddGoingPage({ params }) {
             <option value="going">going</option>
             <option value="maybe going">maybe going</option>
           </select>
-          <button className={styles.button} type="submit">Submit</button>
+          <button className={styles.button} type="submit">
+            Submit
+          </button>
         </form>
       </div>
     </>

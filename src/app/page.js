@@ -11,11 +11,13 @@ export default async function HomePage() {
       <>
         <div classsname={styles.main}>
           <h2 className={styles.h2}>Welcome to Gig Log!</h2>
-          <p className={styles.welcome}>Please sign in or sign up to continue</p>
+          <p className={styles.welcome}>
+            Please sign in or sign up to continue
+          </p>
           <div className={styles.links}>
             <Link className={styles.button} href="/sign-in">
               Sign In
-            </Link> 
+            </Link>
             <Link className={styles.button} href="/sign-up">
               Sign Up
             </Link>
@@ -31,11 +33,10 @@ export default async function HomePage() {
           <Link className={styles.button} href="/profile/:username">
             Continue to my profile
           </Link>
-                  <SignOutButton>
-          <button className={styles.button}>Sign out</button>
-        </SignOutButton>
+          <SignOutButton>
+            <button className={styles.button}>Sign out</button>
+          </SignOutButton>
         </div>
-
       </div>
     </>
   );

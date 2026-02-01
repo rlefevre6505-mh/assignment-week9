@@ -17,3 +17,9 @@
   cursor: pointer;
   color: var(--color-purple);
 }
+
+@media (width < 450px) {
+  .link {
+    font-size: 1.2rem;
+  }
+}

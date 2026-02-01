@@ -45,11 +45,17 @@ export default async function ProfilePage() {
               </p>
               <p className={styles.p}>Joined GigLog on {dateString}</p>
               <div className={styles.p}>
-              <p>Bio:</p>
-              <p>{datum.bio}</p>
+                <p>Bio:</p>
+                <p>{datum.bio}</p>
               </div>
+              <Link
+                className={styles.button}
+                href={`/profile/:username/edit-profile`}
+              >
+                Edit profile
+              </Link>
             </div>
-          ); 
+          );
         })}
         <h3 className={styles.h3}>My posted gigs:</h3>
         <div className={styles.gigs}>
@@ -61,7 +67,7 @@ export default async function ProfilePage() {
             if (user.username == gig.poster)
               return (
                 <div key={`gigpost${i}`} className={styles.gig}>
-                   <Dropdown props={gig.id}/>
+                  <Dropdown props={gig.id} />
                   <h3 className={styles.title}>{gig.title}</h3>
                   <p className="@apply text-40 text-center mb-4">
                     {gig.location} - {dateString}
@@ -85,25 +91,25 @@ export default async function ProfilePage() {
                         }
                       })}
                       <div className={styles.gignav}>
-                  <Link
-                    className={styles.link}
-                    href={`/gigs/add-going/${gig.id}`}
-                  >
-                    Add a ~going~ status
-                  </Link>
-                  <Link
-                    className={styles.link}
-                    href={`/gigs/edit-going/${gig.id}`}
-                  >
-                    Edit your current ~going~ status
-                  </Link>
-                  <Link
-                    className={styles.link}
-                    // add conditional here for if user is already going
-                    href={`/gigs/delete-going/${gig.id}`}
-                  >
-                    Remove your ~going~ status
-                  </Link>
+                        <Link
+                          className={styles.link}
+                          href={`/gigs/add-going/${gig.id}`}
+                        >
+                          Add a ~going~ status
+                        </Link>
+                        <Link
+                          className={styles.link}
+                          href={`/gigs/edit-going/${gig.id}`}
+                        >
+                          Edit your current ~going~ status
+                        </Link>
+                        <Link
+                          className={styles.link}
+                          // add conditional here for if user is already going
+                          href={`/gigs/delete-going/${gig.id}`}
+                        >
+                          Remove your ~going~ status
+                        </Link>
                       </div>
                     </div>
                   </div>
