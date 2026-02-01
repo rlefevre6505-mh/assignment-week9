@@ -1,63 +1,35 @@
-// render lits of all posts (we could also render who posted them)
-
 import styles from "./gigs.module.css";
 import { db } from "@/utils/dbconnection";
 import Link from "next/link";
-
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 export default async function GigsPage({ searchParams }) {
   const query = await db.query(`SELECT * FROM gigs`);
   const gigs = query.rows;
   const queryGoing = await db.query(`SELECT * FROM users_going`);
   const attendees = queryGoing.rows;
+  const userName = await currentUser();
+
+  const queryUsers = await db.query(`SELECT username FROM users`);
+  const users = queryUsers.rows;
+  const userArr = [];
+  users.map((user) => {
+    if (user.username.includes(userName.username)) {
+      userArr.push(userName.username);
+    } else {
+      null;
+    }
+  });
+  if (userArr.length === 0) {
+    redirect(`/:username/user-details-form`);
+  }
 
   // TODO: implement sorting by title of date
-  // const queryString = await searchParams;
-  //
-  // if (queryString.sort === "desc") {
-  //   data.sort((a, b) => {
-  //     return b.title.localeCompare(a.title);
-  //   });
-  // } else if (queryString.sort === "asc") {
-  //   data.sort((a, b) => {
-  //     return a.title.localeCompare(b.title);
-  //   });
-  // } else if (queryString.sort === "datedesc") {
-  //   data.sort((a, b) => {
-  //     return new Date(b.date) - new Date(a.date);
-  //   });
-  // } else if (queryString.sort === "dateasc") {
-  //   data.sort((a, b) => {
-  //     new Date(a.date) - new Date(b.date);
-  //   });
-  // }
 
   return (
     <>
       <h2 className={styles.h2}>All Gigs</h2>
-
-      {/* TODO: set up links for sorting */}
-      <div className={`#`}>
-        {/* <div className={styles.links1}>
-          <Link
-            className="@apply ml-4 mb-2 text-var(--color-purple)"
-            href="/posts?sort=asc"
-          >
-            Sort By Title A-Z
-          </Link>
-          <Link className="@apply ml-4 mb-2" href="/posts?sort=desc">
-            Sort By Title Z-A
-          </Link>
-        </div>
-        <div className={styles.links2}>
-          <Link className="@apply ml-4 mb-2" href="/posts?sort=dateasc">
-            Sort By Newest
-          </Link>
-          <Link className="@apply ml-4 mb-2" href="/posts?sort=datedesc">
-            Sort By Oldest
-          </Link>
-        </div> */}
-      </div>
       <div className={styles.gigs}>
         {gigs.map((gig, i) => {
           const yearString = gig.date.toString().slice(11, 15);
@@ -66,7 +38,6 @@ export default async function GigsPage({ searchParams }) {
           const dateString = `${yearString} - ${dayString} ${monthString}`;
           return (
             <div key={`gigpost${i}`} className={styles.gig}>
-              {/* <Dropdown /> */}
               <h3 className={styles.title}>{gig.title}</h3>
               <p className="@apply text-40 text-center mb-4">
                 {gig.location} - {dateString}
@@ -105,7 +76,6 @@ export default async function GigsPage({ searchParams }) {
                   </Link>
                   <Link
                     className={styles.link}
-                    // add conditional here for if user is already going
                     href={`/gigs/delete-going/${gig.id}`}
                   >
                     Remove your ~going~ status

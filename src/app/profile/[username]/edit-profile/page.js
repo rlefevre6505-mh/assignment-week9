@@ -28,8 +28,8 @@ export default async function EditProfilePage() {
       `UPDATE users SET age='${formValues.age}', location='${formValues.location}', bio='${formValues.bio}' WHERE username = $1`,
       [userName],
     );
-    revalidatePath("http://localhost:3000/profile/:username");
-    redirect(`http://localhost:3000/profile/:username`);
+    revalidatePath("/profile/:username");
+    redirect(`/profile/:username`);
   }
 
   return (

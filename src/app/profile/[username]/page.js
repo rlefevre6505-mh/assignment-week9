@@ -1,27 +1,31 @@
-// dynamic route with username
-// TODO: render user's data
-// READ users data from table
-// option to render a list of all the user's posts (READ)
-//
-// clerk user id doesnt exist until user signs up (users can never see a profile page until sign up). User should sign up/sign in immediately on reaching the site! All routes apart from Home should be protected routes
-//
-// Clerk has 'auth()' which has userID inside (destructure) and all info in 'currentUser()' which also can be destructured - check docs for these (optional chaining can be helpful here incase details are missing)
-
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import styles from "./profile.module.css";
 import Link from "next/link";
 import Dropdown from "@/components/Dropdown";
+import { redirect } from "next/navigation";
 
 export default async function ProfilePage() {
-  // db queries to GET info from tables go here
   const user = await currentUser();
   const queryProfile = await db.query(
     `SELECT * FROM users WHERE username = $1`,
     [user.username],
   );
   const data = queryProfile.rows;
-  console.log(`data = ${data}`);
+
+  const queryUsers = await db.query(`SELECT username FROM users`);
+  const users = queryUsers.rows;
+  const userArr = [];
+  users.map((u) => {
+    if (u.username.includes(user.username)) {
+      userArr.push(user.username);
+    } else {
+      null;
+    }
+  });
+  if (userArr.length === 0) {
+    redirect(`/:username/user-details-form`);
+  }
 
   const queryGigs = await db.query(`SELECT * FROM gigs`);
   const gigs = queryGigs.rows;

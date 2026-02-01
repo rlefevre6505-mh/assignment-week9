@@ -26,8 +26,8 @@ export default async function EditGigPage() {
       `UPDATE gigs SET title='${formValues.title}', date='${formValues.date}', location='${formValues.location}' WHERE id = $1`,
       [gig],
     );
-    revalidatePath("http://localhost:3000/profile/:username");
-    redirect(`http://localhost:3000/profile/:username`);
+    revalidatePath("/profile/:username");
+    redirect(`/profile/:username`);
   }
 
   const currentDate = data.date.toString();

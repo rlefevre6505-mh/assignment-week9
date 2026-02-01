@@ -11,6 +11,20 @@ import styles from "./new-gig.module.css";
 export default async function newPostPage() {
   const user = await currentUser();
 
+  const queryUsers = await db.query(`SELECT username FROM users`);
+  const users = queryUsers.rows;
+  const userArr = [];
+  users.map((u) => {
+    if (u.username.includes(user.username)) {
+      userArr.push(user.username);
+    } else {
+      null;
+    }
+  });
+  if (userArr.length === 0) {
+    redirect(`/:username/user-details-form`);
+  }
+
   async function handleSubmit(rawFormData) {
     "use server";
     const formValues = {
