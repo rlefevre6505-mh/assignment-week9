@@ -34,7 +34,7 @@ export default async function ProfilePage() {
 
   return (
     <>
-      <div className={`#`}>
+      <div className={styles.main}>
         <h2 className={styles.h2}>Profile: {user.username}</h2>
         {data.map((datum, i) => {
           const yearString = datum.join_date.toString().slice(11, 15);
