@@ -37,4 +37,6 @@ However, as a user you can:
 
 I'm confident I have achieved all basic requirements and for stretch goals I have allowed users to update and delete their content (edit or delete both posted gigs and their ~going~ status for any gig), implemented global error and not-found page and created code in the main page of each route (covering all that can be reached through links) that redirects the user to the profile information form if they haven’t already submitted their info.
 
+I've added an about page, linked in the header, to clarify how the siter should be used.
+
 I would love some feedback on any aspects of the code that I could have done differently or better, perhaps in a shorter form, eg. the code to reformat the date from the DB into a useable format for the form input, or perhaps any bits of code that work fine now, but would slow the page if the users table had thousands of entries, such as the redirect conditional that forces users back to the profile details form if they've not submitted it previously. I'm also conscious that I created some functionality in JS that could have been accomplished with more specific SQL using JOIN and other keywords, so intend to go back to this and learn more soon. Any other feedback is always welcome!

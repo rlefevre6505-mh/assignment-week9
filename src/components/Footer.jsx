@@ -10,9 +10,6 @@ export default async function Footer({ searchParams }) {
   return (
     <footer className="@apply fixed bottom-0 inset-x-0 ">
       <nav className="@apply flex flex-row grow justify-evenly items-center w-full h-16 absolute bottom-0 ">
-        <Link className={styles.link} href="/">
-          Home
-        </Link>
         <Link className={styles.link} href="/profile/:username">
           My Profile
         </Link>
