@@ -22,8 +22,8 @@ const quicksandSans = Quicksand({
 });
 
 export const metadata = {
-  title: "Gig Blog",
-  description: "A blog about rock and metal concerts and festivals",
+  title: "GigLog",
+  description: "Your live music hub for connecting with gig-goers",
 };
 
 export default function RootLayout({ children }) {

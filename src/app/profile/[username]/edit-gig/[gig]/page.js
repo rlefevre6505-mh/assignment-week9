@@ -1,17 +1,18 @@
 "use server";
-
 import { db } from "@/utils/dbconnection";
 import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 import styles from "./edit-gig.module.css";
 
-export default async function EditGigPage() {
+export default async function EditGigPage({ params }) {
   const user = await currentUser();
   const userName = user.username;
+  const slug = await params;
+  const gigID = slug.gig;
 
   const currentQuery = await db.query(`SELECT * FROM gigs WHERE id = $1`, [
-    gig,
+    gigID,
   ]);
   const data = currentQuery.rows[0];
 
@@ -24,7 +25,7 @@ export default async function EditGigPage() {
     };
     const query = await db.query(
       `UPDATE gigs SET title='${formValues.title}', date='${formValues.date}', location='${formValues.location}' WHERE id = $1`,
-      [gig],
+      [gigID],
     );
     revalidatePath("/profile/:username");
     redirect(`/profile/:username`);
