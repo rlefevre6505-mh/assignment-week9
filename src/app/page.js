@@ -22,6 +22,9 @@ export default async function HomePage() {
               Sign Up
             </Link>
           </div>
+          {/* <video autoPlay muted loop preload="auto" className={styles.video}>
+              <source src="/video/mp4.mp4" type="video/mp4" />
+            </video> */}
         </div>
       </>
     );

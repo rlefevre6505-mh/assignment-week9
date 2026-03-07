@@ -1,24 +1,45 @@
 .header {
-  background-color: var(--color-bg);
-  height: 20vh;
+  height: 25vh;
   position: relative;
   /* display: flex;
   justify-content: space-around;
   align-items: center; */
 }
 
+.header_image {
+  position: absolute;
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
 .h1 {
+  width: fit-content;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  padding: 0 6rem 0 6rem;
+  background: radial-gradient(
+    black,
+    black,
+    transparent,
+    transparent,
+    transparent
+  );
+  position: relative;
   text-align: center;
-  font-size: 4.8rem;
+  font-size: 6rem;
   font-weight: 400;
   font-family: var(--font-teko);
   color: var(--color-purple);
+  /* z-index: 11; */
+  text-shadow: rgb(0, 0, 0) 0 0 3px;
 }
 
 .links {
+  background-color: transparent;
   position: absolute;
-  top: 0.4rem;
-  right: 0.4rem;
+  top: 1.2rem;
+  right: 1.2rem;
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
@@ -43,5 +64,13 @@
   .link {
     font-size: 1rem;
     padding: 4px 12px 2 12px;
+  }
+  .h1 {
+    padding: 0 2rem 0 2rem;
+  }
+  .links {
+    position: absolute;
+    top: 1.2rem;
+    right: 0;
   }
 }
